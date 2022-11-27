@@ -28,7 +28,6 @@ const Login = () => {
     localStorage.setItem("user", JSON.stringify(res.profileObj));
     const { name, imageUrl, googleId } = res.profileObj;
 
-    
     const doc = {
       _id: googleId,
       _type: "user",
@@ -43,6 +42,8 @@ const Login = () => {
     client.createIfNotExists(doc)
       .then(navigate('/', {replace:true}))
   };
+
+  
   const onFailure = (err) => {
     console.log("failed:", err);
     alert(err.massage);
@@ -96,11 +97,3 @@ const Login = () => {
 
 export default Login;
 
-
-// echo "# share-picture-story-front" >> README.md
-// git init
-// git add README.md
-// git commit -m "first commit"
-// git branch -M main
-// git remote add origin https://github.com/GeorgiPetrushev/share-picture-story-front.git
-// git push -u origin main

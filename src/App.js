@@ -6,9 +6,10 @@ import Login from "./components/Login";
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="login" element={<Login />} />
-        <Route path="/" element={<Home />} />
+      <Routes path="/login">
+      <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        
       </Routes>
     </BrowserRouter>
   );
