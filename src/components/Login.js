@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../media/logo-w.png";
+import logo from "../media/logoWhite.png";
 import bgVideo from "../media/bg-video.mp4";
 import { FcGoogle } from "react-icons/fc";
 import { GoogleLogin } from "react-google-login";
