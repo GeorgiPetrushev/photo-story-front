@@ -3,7 +3,7 @@ import { Route, Routes, Link } from "react-router-dom";
 import UserProfile from "../components/UserProfile";
 import SideBar from "../components/SideBar";
 import { client } from "../client";
-import Pins from "../components/Pins";
+import Pins from "./Pins";
 import { AiOutlineClose } from "react-icons/ai";
 import {BiMenuAltLeft} from "react-icons/bi"
 import logo from "../media/logoBlack.png";
