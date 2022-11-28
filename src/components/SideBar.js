@@ -22,12 +22,12 @@ const SideBar = ({ user, closeToggle }) => {
   ];
 
   const isNotActiveStyle =
-    "flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize";
+    "flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize ";
   const isActiveStyle =
     "flex items-center px-5 gap-3 font-extrabold border-r-2 border-black  transition-all duration-200 ease-in-out capitalize";
 
   return (
-    <div className="flex flex-col justify-between bg-yellow-100 h-full overflow-y-scroll min-w-210 hide-scrollbar">
+    <div className="flex flex-col justify-between bg-white h-full overflow-y-scroll min-w-210 hide-scrollbar">
       <div className="flex flex-col">
         <Link
           className="flex px-5 gap-2 my-6 pt-1 w-210 items-center"
