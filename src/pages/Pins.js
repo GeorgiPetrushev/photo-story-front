@@ -8,6 +8,9 @@ import Feed from "../components/Feed";
 
 
 const Pins = () => {
+
+  const [serach,setSeatch] =useState('');
+  
   return <div>Pins</div>;
 };
 

@@ -5,7 +5,7 @@ import SideBar from "../components/SideBar";
 import { client } from "../client";
 import Pins from "./Pins";
 import { AiOutlineClose } from "react-icons/ai";
-import {BiMenuAltLeft} from "react-icons/bi"
+import { BiMenuAltLeft } from "react-icons/bi";
 import logo from "../media/logoBlack.png";
 //getting data from sanity
 import { userQuery } from "../data";
@@ -42,6 +42,9 @@ const Home = () => {
   useEffect(() => {
     scrollRef.current.scrollTo(0, 0);
   }, []);
+  //
+  //
+  //
 
   const toggleSidebar = () => {
     setSideBarToggle((prev) => !prev);
@@ -70,18 +73,18 @@ const Home = () => {
           </Link>
         </div>
         {sideBarToggle && (
-        <div className="fixed w-4/5 bg-white h-screen overflow-y-auto shadow-lg z-10 animate-slide-in">
-          <div
-            className="absolute w-full flex justify-end items-center p-2"
-            onClick={toggleSidebar}
-          >
-            <AiOutlineClose className="cursor-pointer"/>
+          <div className="fixed w-4/5 bg-white h-screen overflow-y-auto shadow-lg z-10 animate-slide-in">
+            <div
+              className="absolute w-full flex justify-end items-center p-2"
+              onClick={toggleSidebar}
+            >
+              <AiOutlineClose className="cursor-pointer" />
+            </div>
+            <SideBar user={user && user} closeToggle={setSideBarToggle} />
           </div>
-          <SideBar user={user && user} closeToggle={setSideBarToggle} />
-        </div>
-      )}
+        )}
       </div>
-      
+
       <div className="pb-2 flex-1 h-screen overflow-y-scroll" ref={scrollRef}>
         <Routes>
           <Route path="/user-profile/:userId" element={<UserProfile />} />
