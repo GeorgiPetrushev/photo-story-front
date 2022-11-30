@@ -1,9 +1,13 @@
-import React from 'react'
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { client } from "../client";
+import Layout from "./Layout";
+import Spinner from "./Spinner";
 
 const Feed = () => {
-  return (
-    <div>Feed</div>
-  )
-}
+  const [loading, setLoading] = useState(true);
 
-export default Feed
+  return loading ? <Spinner message='Loading...'></Spinner> : <div></div>;
+};
+
+export default Feed;
