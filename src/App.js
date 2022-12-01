@@ -11,7 +11,7 @@ const App = () => {
         <Route path="login" element={<Login />} />
       </Routes>
 
-      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+      <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
         © 2022 . All Rights Reserved. Powered by Georgi Petrushev.
       </span>
     </BrowserRouter>
