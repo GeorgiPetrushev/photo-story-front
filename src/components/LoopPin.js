@@ -25,6 +25,20 @@ const LoopPin = ({ pin: { image, postedBy, _id, destination } }) => {
           className="rounded-lg w-full"
           alt="user"
         ></img>
+        {hover && (
+          <div className="absolute top-0 w-full h-full flex flex-col justify-between z-30 p-2">
+            <div className="flex justify-between items-center">
+              <div className="flex gap-2">
+                <a
+                className='bg-white w-7 h-7 hover:opacity-100 hover:shadow-sm hover:duration-500 hover:scale-125 outline-none  rounded-full flex justify-center items-center text-3xl text-black opacity-40'
+                  download
+                  href={`${image?.asset?.url}?dl=`}
+                  onClick={(e) => e.stopPropagation()}
+                ><MdDownloadForOffline /></a>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
