@@ -8,8 +8,8 @@ const NavBar = ({ user, search, setSearch }) => {
 
   return (
     user && (
-      <div className="flex gap-2 md:gap-5 w-full mt-5 pb-7">
-        <div className="flex justify-start items-center w-full px-2 rounded-lg bg-white border-none outline-none focus-within:shadow-sm">
+      <div className="flex gap-2 md:gap-5 w-full mt-5 py-5 px-3">
+        <div className="flex justify-start items-center w-full px-2 rounded-lg bg-white border-none outline-none focus-within:shadow-md">
           <BiSearchAlt className="text-lg ml-1" />
           <input
             placeholder="Search..."
@@ -25,12 +25,12 @@ const NavBar = ({ user, search, setSearch }) => {
             <img
               src={user.image}
               alt="user-img"
-              className="w-12 h-12  rounded-lg "
+              className="w-10 h-10  rounded-lg "
             />
           </Link>
           <Link
             to="create-pin"
-            className="bg-black text-white text-lg rounded-lg h-12 w-12 flex justify-center items-center"
+            className="bg-black text-white text-lg rounded-lg h-10 w-10 flex justify-center items-center"
           >
             <RiAddFill />
           </Link>
