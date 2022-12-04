@@ -27,9 +27,11 @@ const Feed = () => {
     }
   }, [categoryId]);
 
-  return loading ? <Spinner message="Loading..."></Spinner> : <div>
-    {pins && <Layout pins={pins}/>}
-  </div>;
+  return loading ? (
+    <Spinner message="Loading..."></Spinner>
+  ) : (
+    <div>{pins && <Layout pins={pins} />}</div>
+  );
 };
 
 export default Feed;
