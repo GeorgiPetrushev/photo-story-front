@@ -16,8 +16,8 @@ const CreatePin = ({ user }) => {
   const [web, setWeb] = useState("");
   const [loading, setLoading] = useState(false);
   const [fields, setFields] = useState(false);
-  const [category, setCategory] = useState(null);
-  const [imageAsset, setImageAsset] = useState(null);
+  const [category, setCategory] = useState(false);
+  const [imageAsset, setImageAsset] = useState(false);
   const [wrongImgType, setWrongImgType] = useState(false);
 
   //testing
@@ -91,7 +91,19 @@ const CreatePin = ({ user }) => {
               </label>
             ) : (
               <div className="relative h-full">
-                <img src={imageAsset?.url} alt="none" />
+                <img
+                  src={imageAsset?.url}
+                  className="h-full w-full"
+                  alt="Error pic"
+                />
+                <button
+                  className="absolute p-3 b-3 right-3 bg-white text-lg cursor-pointer outline-none hover:shadow-lg transition-all duration-700 ease-in-out"
+                  type="button"
+                  onClick={()=> { setImageAsset(null)}}
+                >
+                  {" "}
+                  <MdDeleteForever />
+                </button>
               </div>
             )}
           </div>
