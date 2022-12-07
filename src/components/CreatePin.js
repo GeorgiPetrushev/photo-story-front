@@ -28,30 +28,23 @@ const CreatePin = ({ user }) => {
   }, []);
 
   //uploadImage
-  const uploadImg = (e) => {
-    const { type, name } = e.target.fields[0];
-    if (
-      type === "img/svg" ||
-      type === "img/png" ||
-      type === "img/gif" ||
-      type === "img/jpg"
-    ) {
-      setLoading(true);
+  const uploadImage = (e) => {
+    const selectedFile = e.target.files[0];
+    // uploading asset to sanity
+    if (selectedFile.type === 'image/png' || selectedFile.type === 'image/svg' || selectedFile.type === 'image/jpeg' || selectedFile.type === 'image/gif' || selectedFile.type === 'image/tiff') {
       setWrongImgType(false);
+      setLoading(true);
       client.assets
-        .upload("image", e.target.fields[0], {
-          contentType: type,
-          filename: name,
-        })
-        .then((doc) => {
-          setImageAsset(doc);
+        .upload('image', selectedFile, { contentType: selectedFile.type, filename: selectedFile.name })
+        .then((document) => {
+          setImageAsset(document);
           setLoading(false);
         })
-        .catch((err) => {
-          console.log("image upload error", err);
-          alert("incorrect image type");
+        .catch((error) => {
+          console.log('Upload failed:', error.message);
         });
     } else {
+      setLoading(false);
       setWrongImgType(true);
     }
   };
@@ -86,7 +79,7 @@ const CreatePin = ({ user }) => {
                   name="upload-image"
                   type="file"
                   className="w-0 h-0"
-                  onChange={uploadImg}
+                  onChange={uploadImage}
                 ></input>
               </label>
             ) : (
@@ -97,12 +90,12 @@ const CreatePin = ({ user }) => {
                   alt="Error pic"
                 />
                 <button
-                  className="absolute p-3 b-3 right-3 bg-white text-lg cursor-pointer outline-none hover:shadow-lg transition-all duration-700 ease-in-out"
+                  className="absolute bottom-2 right-2 p-4 rounded-full bg-white text-xl cursor-pointer outline-none hover:shadow-lg hover:bg-red-400 transition-all duration-700 ease-in-out"
                   type="button"
                   onClick={()=> { setImageAsset(null)}}
                 >
                   {" "}
-                  <MdDeleteForever />
+                  <MdDeleteForever  className='hover:scale-125 duration-500'/>
                 </button>
               </div>
             )}
