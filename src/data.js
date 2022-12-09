@@ -41,7 +41,7 @@ export const categories = [
     name: 'cats',
     image: 'https://i.pinimg.com/236x/6c/3c/52/6c3c529e8dadc7cffc4fddedd4caabe1.jpg',
   }, {
-    name: 'dogs',
+    name: 'dog',
     image: 'https://i.pinimg.com/236x/1b/c8/30/1bc83077e363db1a394bf6a64b071e9f.jpg',
   },
   {

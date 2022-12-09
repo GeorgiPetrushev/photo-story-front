@@ -66,10 +66,34 @@ const CreatePin = ({ user }) => {
   //
   //Save
   const savePin = () => {
-    if(title && about && web && imageAsset?._id && category){
-      console.log('yes');
+    if (title && about && web && imageAsset?._id && category) {
+      const doc = {
+        _type: "pin",
+        title: title,
+        about: about,
+        destination: web,
+        image: {
+          _type: "image",
+          asset: {
+            _type: "reference",
+            _ref: imageAsset?._id,
+          },
+        },
+        userId: user._id,
+        postedBy: {
+          _type: "postedBy",
+          _ref: user._id,
+        },
+        category: category,
+      };
+      client.create(doc).then(() => navigate("/"));
+    } else {
+      setFields(true);
+
+      setTimeout(() => {
+        setFields(false);
+      }, 2000);
     }
-    else{console.log('no')}
   };
   //
   //
@@ -77,55 +101,65 @@ const CreatePin = ({ user }) => {
   //
   //return
   return (
-    <div className="flex justify-center items-center mt-3 lg:4/5">
-      {fields && <p className="text-red-400">There are blank fields!</p>}
-      <div className="flex flex-col lg:flex-row justify-center items-center p-3 lg:p-6 w-full lg:w-4/5">
-        <div className="p-3 bg-secondaryColor w-full flex flex-0.7">
-          <div className="flex justify-center items-center flex-col border-2 border-dotted border-gray-500 p-3 w-full h-420">
-            {loading && (
+    <div className="flex flex-col justify-center items-center mt-5 lg:h-4/5">
+      {fields && (
+        <p className="text-red-400 mb-5 text-xl transition-opacity duration-700 ease-in ">
+          There are blank fields!
+        </p>
+      )}
+      <div className=" flex  justify-center items-center lg:flex-row flex-col  lg:p-5 p-3 lg:w-4/5  w-full bg-white ">
+        <div className="bg-secondaryColor p-3 flex flex-0.7 w-full">
+          <div className="flex justify-center items-center flex-col border-2 border-dotted border-gray-500 p-3 min-w-350 w-full h-420">
+            {loading ? (
               <div>
                 <Spinner />
                 <h2 className="text-center">Loading...</h2>
               </div>
-            )}
-            {wrongImgType && <h3>Wrong image type.</h3>}
-            {!imageAsset ? (
-              <label>
-                <div className="flex flex-col items-center justify-center h-full">
-                  <div className="flex flex-col items-center justify-center">
-                    <h3 className="font-bold text-5xl">
-                      <SlCloudUpload />
-                    </h3>
-                    <h3 className="text-lg"> Click to upload</h3>
-                  </div>
-                  <h3 className="mt-20 text-gray-500">
-                    Image Type JPG, SVG, PNG, GIF less than 20MB
-                  </h3>
-                </div>
-                <input
-                  name="upload-image"
-                  type="file"
-                  className="w-0 h-0"
-                  onChange={uploadImage}
-                ></input>
-              </label>
             ) : (
-              <div className="relative h-full">
-                <img
-                  src={imageAsset?.url}
-                  className="h-full w-full"
-                  alt="Error pic"
-                />
-                <button
-                  className="absolute bottom-2 right-2 p-4 rounded-full bg-white text-xl cursor-pointer outline-none hover:shadow-lg hover:bg-red-400 transition-all duration-700 ease-in-out"
-                  type="button"
-                  onClick={() => {
-                    setImageAsset(null);
-                  }}
-                >
-                  {" "}
-                  <MdDeleteForever className="hover:scale-125 duration-500" />
-                </button>
+              <div>
+                {" "}
+                {wrongImgType && (
+                  <h3 className="text-red-400">Wrong image type.</h3>
+                )}
+                {!imageAsset ? (
+                  <label>
+                    <div className="flex flex-col items-center justify-center h-full cursor-pointer">
+                      <div className="flex flex-col items-center justify-center">
+                        <h3 className="font-bold text-5xl">
+                          <SlCloudUpload />
+                        </h3>
+                        <h3 className="text-lg"> Click to upload</h3>
+                      </div>
+                      <h3 className="mt-20 text-gray-500">
+                        Image Type JPG, SVG, PNG, GIF less than 20MB
+                      </h3>
+                    </div>
+                    <input
+                      name="upload-image"
+                      type="file"
+                      className="w-0 h-0"
+                      onChange={uploadImage}
+                    ></input>
+                  </label>
+                ) : (
+                  <div className="relative max-h-370 h-full">
+                    <img
+                      src={imageAsset?.url}
+                      className="h-full w-full"
+                      alt="Error pic"
+                    />
+                    <button
+                      className="absolute bottom-2 right-2 p-4 rounded-full bg-white text-xl cursor-pointer outline-none hover:shadow-lg hover:bg-red-400 transition-all duration-700 ease-in-out"
+                      type="button"
+                      onClick={() => {
+                        setImageAsset(null);
+                      }}
+                    >
+                      {" "}
+                      <MdDeleteForever className="hover:scale-125 duration-500" />
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>
