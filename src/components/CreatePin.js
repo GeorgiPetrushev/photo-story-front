@@ -9,7 +9,6 @@ import { categories } from "../data";
 const CreatePin = ({ user }) => {
   //navigate
   const navigate = useNavigate();
-
   //useStates
   const [title, setTitle] = useState("");
   const [about, setAbout] = useState("");
@@ -19,36 +18,64 @@ const CreatePin = ({ user }) => {
   const [category, setCategory] = useState(false);
   const [imageAsset, setImageAsset] = useState(false);
   const [wrongImgType, setWrongImgType] = useState(false);
-
+  //
+  //
+  //
   //testing
   useEffect(() => {
     console.log(user);
     console.log(client);
     console.log(categories[1].name);
   }, []);
-
+  //
+  //
+  //
   //uploadImage
   const uploadImage = (e) => {
     const selectedFile = e.target.files[0];
     // uploading asset to sanity
-    if (selectedFile.type === 'image/png' || selectedFile.type === 'image/svg' || selectedFile.type === 'image/jpeg' || selectedFile.type === 'image/gif' || selectedFile.type === 'image/tiff') {
+    if (
+      selectedFile.type === "image/png" ||
+      selectedFile.type === "image/svg" ||
+      selectedFile.type === "image/jpeg" ||
+      selectedFile.type === "image/gif" ||
+      selectedFile.type === "image/tiff"
+    ) {
       setWrongImgType(false);
       setLoading(true);
       client.assets
-        .upload('image', selectedFile, { contentType: selectedFile.type, filename: selectedFile.name })
+        .upload("image", selectedFile, {
+          contentType: selectedFile.type,
+          filename: selectedFile.name,
+        })
         .then((document) => {
           setImageAsset(document);
           setLoading(false);
         })
         .catch((error) => {
-          console.log('Upload failed:', error.message);
+          console.log("Upload failed:", error.message);
         });
     } else {
       setLoading(false);
       setWrongImgType(true);
     }
   };
-
+  //
+  //
+  //
+  //
+  //Save
+  const savePin = () => {
+    if(title && about && web && imageAsset?._id && category){
+      console.log('yes');
+    }
+    else{console.log('no')}
+  };
+  //
+  //
+  //
+  //
+  //return
   return (
     <div className="flex justify-center items-center mt-3 lg:4/5">
       {fields && <p className="text-red-400">There are blank fields!</p>}
@@ -92,13 +119,82 @@ const CreatePin = ({ user }) => {
                 <button
                   className="absolute bottom-2 right-2 p-4 rounded-full bg-white text-xl cursor-pointer outline-none hover:shadow-lg hover:bg-red-400 transition-all duration-700 ease-in-out"
                   type="button"
-                  onClick={()=> { setImageAsset(null)}}
+                  onClick={() => {
+                    setImageAsset(null);
+                  }}
                 >
                   {" "}
-                  <MdDeleteForever  className='hover:scale-125 duration-500'/>
+                  <MdDeleteForever className="hover:scale-125 duration-500" />
                 </button>
               </div>
             )}
+          </div>
+        </div>
+        <div className="flex flex-1 flex-col gap-6 lg:pl-5 mt-6 w-full">
+          <input
+            placeholder="Add title "
+            type="text"
+            className="outline-none text-2xl sm:text-4xl font-bold border-b-2 border-gray-400 p-3"
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+            value={title}
+          ></input>
+          {user && (
+            <div className="flex gap-2 items-center bg-white rounded-lg">
+              <img
+                src={user.image}
+                className="w-12 h-12 rounded-full"
+                alt="user-img"
+              />
+              <h3 className="text-xl font-bold">{user.userName}</h3>
+            </div>
+          )}
+          <input
+            placeholder="Describe your photo"
+            type="text"
+            className="outline-none text-base sm:text-lg border-b-2 border-gray-400 p-3"
+            onChange={(e) => {
+              setAbout(e.target.value);
+            }}
+            value={about}
+          ></input>
+          <input
+            placeholder="Add a link"
+            type="text"
+            className="outline-none text-base sm:text-lg border-b-2 border-gray-400 p-3"
+            onChange={(e) => {
+              setWeb(e.target.value);
+            }}
+            value={web}
+          ></input>
+          <div className="flex flex-col">
+            <div>
+              <h3 className="mb-3 font=semibold  text-lg ">Select Category</h3>
+              <select
+                onChange={(e) => setCategory(e.target.value)}
+                className="p-2 rounded-sm outline-none w-4/5 cursor-pointer border-b-2 border-gray-300"
+              >
+                <option>Select</option>
+                {categories.map((category) => (
+                  <option
+                    className="text-base outline-none border-none capitalize bg-white text-black"
+                    value={category.name}
+                  >
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="flex justify-end items-end mt-5">
+              <button
+                type="button"
+                className="p-2 bg-red-400 text-white rounded-full w-28 outline-none"
+                onClick={savePin}
+              >
+                SAVE
+              </button>
+            </div>
           </div>
         </div>
       </div>
