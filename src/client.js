@@ -15,7 +15,6 @@ export const client = sanityClient({
 
 //img sanity code
 const builder = imageUrlBuilder(client);
-
 export const urlFor = (source) => {
   return builder.image(source);
 };
