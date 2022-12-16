@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import { client } from "../client";
 
 const Login = () => {
-
   const navigate = useNavigate();
 
   const clientId = process.env.REACT_APP_GOOGLE_API_AUTH;
@@ -35,15 +34,10 @@ const Login = () => {
       image: imageUrl,
     };
 
-
-
-
     // push data to backend and if login is true can`t go back to login page {replace}
-    client.createIfNotExists(doc)
-      .then(navigate('/', {replace:true}))
+    client.createIfNotExists(doc).then(navigate("/", { replace: true }));
   };
 
-  
   const onFailure = (err) => {
     console.log("failed:", err);
     alert(err.massage);
@@ -96,4 +90,3 @@ const Login = () => {
 };
 
 export default Login;
-
