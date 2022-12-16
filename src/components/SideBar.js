@@ -3,23 +3,14 @@ import { Link, NavLink } from "react-router-dom";
 import { RiHome2Line } from "react-icons/ri";
 import { IoIosArrowForward } from "react-icons/io";
 import logo from "../media/logoBlack.png";
+import { categories } from "../data";
 
 const SideBar = ({ user, closeToggle }) => {
   const closeSideBar = () => {
     if (closeToggle) closeToggle(false);
   };
 
-  const cateogries = [
-    { name: "Animals" },
-    { name: "cat" },
-    { name: "dog" },
-    { name: "Animals1" },
-    { name: "Animal2" },
-    { name: "Animals3" },
-    { name: "Animals4" },
-    { name: "Animals5" },
-    { name: "Animals6" },
-  ];
+
 
   const isNotActiveStyle =
     "flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize ";
@@ -47,9 +38,9 @@ const SideBar = ({ user, closeToggle }) => {
             <RiHome2Line /> Home
           </NavLink>
           <h3 className="mt-2 px-5 text-base 2xl:text-xl">
-            Discover cateogries
+            Discover categories
           </h3>
-          {cateogries.slice(0, cateogries.length - 1).map((category) => (
+          {categories.slice(0, categories.length - 1).map((category) => (
             <NavLink
               key={category.name}
               to={`category/${category.name}`}
@@ -57,7 +48,7 @@ const SideBar = ({ user, closeToggle }) => {
               className={({ isActive }) =>
                 isActive ? isActiveStyle : isNotActiveStyle
               }
-            >{category.name}</NavLink>
+            ><img src={category.image} alt='category-img' className='w-10 h-10 rounded-md'></img>{category.name}</NavLink>
           ))}
         </div>
         {user && (
