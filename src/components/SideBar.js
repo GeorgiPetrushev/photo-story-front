@@ -2,8 +2,9 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { RiHome2Line } from "react-icons/ri";
 import { IoIosArrowForward } from "react-icons/io";
-import logo from "../media/logoBlack.png";
 import { categories } from "../data";
+import logo from "../media/logoBlack.png";
+
 
 const SideBar = ({ user, closeToggle }) => {
   const closeSideBar = () => {
